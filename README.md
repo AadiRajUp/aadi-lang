@@ -3,7 +3,7 @@ EVERYTHING WAS BUILT USING THE CONCEPTS LEARNT IN THEORY OF COMPUTATION (TOC ENC
 
 This is the reason why prolly most stuff I did are wildly ineffecient, non-sacalble and bad code. (and this was coded in at most a day)
 
-This is me trying to create an implemet a 
+This is me trying to create and implemet a 
 1) Working Lexer
 2) Working Parser ( which parses in my own format )
 3) Working Evaluater
