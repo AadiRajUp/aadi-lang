@@ -14,3 +14,14 @@ As of currently addition, subtraction, multiplication, division and assignment a
 You can create and Use variables, but thats about it.
 
 I hope I continue on this.
+
+(days later)
+
+Yayy I continued it.
+
+It was pointed out to me that my variable declatration system and arithmetic evaluation system collapses when 
+int a = -2; is written, it couldnt handle -ve numbers (thx mandip). 
+finally that has been fixed.
+now int a = -2; behaves as int a = 0 - 2; so all is well
+
+the by product of this is that a = 5+ - + - + - 5 = 10
