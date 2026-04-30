@@ -9,8 +9,8 @@ class SemicolonError(Exception):
 
 allowed_identifier_names = set("qwertyuiopasdfghjklzxcvbnm_1234567890")
 numbers = set("1234567890")
-operators = set("+-=*/,")
-for i in ["==","<=",">=","!=","<",">"]:
+operators = set("+-=*/,!&|")
+for i in ["==","<=",">=","!=","<",">","&&","||"]:
     operators.add(i)
 
 
@@ -29,6 +29,25 @@ def divide(a, b):
     if b == 0:
         raise DivideByZeroError("your divisor is zero ligma")
     return a/b
+def checkequal(a,b):
+    return 1 if a == b else 0
+def checkgreater(a,b):
+    return 1 if a > b else 0
+def checklesser(a,b):
+    return 1 if a < b else 0
+def checkgreaterequal(a,b):
+    return 1 if checkgreater(a,b) or checkequal(a,b) else 0
+def checklesserequal(a,b):
+    return 1 if checklesser(a,b) or checkequal(a,b) else 0
+def checknotequal(a,b):
+    return 1 if a != b else 0
+def ander(a,b):
+    return 1 if a * b else 0
+def orer(a,b):
+    return 1 if a + b else 0
+
+def negation(a):
+    return 0 if a else 1
 
 
 def tofloat_or_int(a):
@@ -71,10 +90,21 @@ def check_type(ch):
 
 operators = {
     "=":[0,"assignment",assignment],
-    "+":[-1,"arithmetic",add],
-    "-":[-1,"arithmetic",subtract],
-    "*":[-2,"arithmetic",multiply],
-    "/":[-2,"arithmetic",divide],
+    "&&":[-1,"arithmetic",ander],
+    "||":[-1,"arithmetic",orer],
+    "==":[-1,"arithmetic",checkequal],
+    "<=":[-1,"arithmetic",checklesserequal],
+    ">=":[-1,"arithmetic",checkgreaterequal],
+    "!":[-1,"arithmetic",negation],
+    "!=":[-1,"arithmetic",checknotequal],
+    ">":[-1,"arithmetic",checkgreater],
+    "<":[-1,"arithmetic",checklesser],
+    "+":[-2,"arithmetic",add],
+    "-":[-2,"arithmetic",subtract],
+    "*":[-3,"arithmetic",multiply],
+    "/":[-3,"arithmetic",divide],
+
+    
 }
 keywords = {
     "int": ["declarative"],
@@ -178,7 +208,7 @@ def parse_declarative(exp):
         
     # lets break rest of the expression into commas and shii
     expression_tree=[]
-    mini_expressions=["int"]
+    mini_expressions=[data_type]
     for i in rest_of_the_expression:
         if i == ",":
             # comma aauda = xa bhane declarative ra arithmetic ma split garne
@@ -187,10 +217,10 @@ def parse_declarative(exp):
                 expression_tree.append(["declerative",mini_expressions[:2]])
                 mini_expressions.pop(0)
                 expression_tree.append(["arithmetic",mini_expressions])
-                mini_expressions=["int"]
+                mini_expressions=[data_type]
             else:
                 expression_tree.append(["declerative",mini_expressions[:2]])
-                mini_expressions=["int"]
+                mini_expressions=[data_type]
             continue
         mini_expressions.append(i)
     if "=" in mini_expressions:
@@ -211,7 +241,7 @@ def parse_tree(exp):
         return exp[0]
         
     result = []
-    highest_presidense = -3
+    highest_presidense = -99
     # Highest presidence nikalne ani identifiers haru lai ni haldine set ma
     
     for i in exp:
@@ -323,7 +353,7 @@ def arithmetic_evaluater(tree):
     #                              ^
     # Imagine trying to understand | after a month or so
 expression = """
-int c=  5+ + - -5;
+int c=  5>5 - 1&&1;
 
 """
 list_of_lexered = lexer(expression)
@@ -337,5 +367,9 @@ for lexemes in list_of_lexered:
     print(evaluated)
 
     
-
+# from my latest research
+# (research means fiddling around in programiz c compiler)
+# i have a hypothesis that 
+# if there is a boolean algebra in the entire arithmetic statement the entire arithmetic statement goes under a huge normalization
+# if the result was non zero 
 print(identifiers)

@@ -25,3 +25,9 @@ finally that has been fixed.
 now int a = -2; behaves as int a = 0 - 2; so all is well
 
 the by product of this is that a = 5+ - + - + - 5 = 10
+
+April 30 15:45
+(yes aaba dekhi date ni halxu lol)
+2 hrs later 
+boolean expression added 0= false 1 = true
+unary statements chai evaluate garna sakdaina like !a a++ etc etc, but i have a dream ( and a theory)
